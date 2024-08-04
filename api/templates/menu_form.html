@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Menu Form{% endblock %}
+
+{% block content %}
+    <h2>Menu Form</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'menu-list' %}">Back to Menus</a>
+{% endblock %}
+

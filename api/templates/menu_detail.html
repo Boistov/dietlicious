@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{{ menu.name }}{% endblock %}
+
+{% block content %}
+<h1>{{ menu.name }}</h1>
+<p>{{ menu.description }}</p>
+<h3>Dishes</h3>
+<ul>
+    {% for dish in menu.dishes.all %}
+        <li>
+            <h4>{{ dish.name }}</h4>
+            <img src="{{ dish.image.url }}" alt="{{ dish.name }}" class="img-fluid">
+            <p>{{ dish.description }}</p>
+            <p>Price: {{ dish.price }}</p>
+            <p>Category: {{ dish.category.name }}</p>
+            <a href="{% url 'dish-detail' dish.id %}" class="btn btn-primary">View Details</a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'menu-list' %}" class="btn btn-secondary">Back to Menus</a>
+{% endblock %}

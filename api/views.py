@@ -5,7 +5,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 
 
-
 class CategoryListView(ListView):
     model = Category
     template_name = 'category_list.html'
@@ -33,11 +32,17 @@ class CategoryDeleteView(DeleteView):
     template_name = 'category_confirm_delete.html'
     success_url = reverse_lazy('category-list')
 
-# Dish Views
+
 class DishListView(ListView):
     model = Dish
     template_name = 'dish_list.html'
     context_object_name = 'dishes'
+
+    def get_queryset(self):
+        category_id = self.kwargs.get('category_id')
+        if category_id:
+            return Dish.objects.filter(category_id=category_id)
+        return Dish.objects.all()
 
 class DishDetailView(DetailView):
     model = Dish
@@ -61,7 +66,7 @@ class DishDeleteView(DeleteView):
     template_name = 'dish_confirm_delete.html'
     success_url = reverse_lazy('dish-list')
 
-# Menu Views
+
 class MenuListView(ListView):
     model = Menu
     template_name = 'menu_list.html'
@@ -88,6 +93,7 @@ class MenuDeleteView(DeleteView):
     model = Menu
     template_name = 'menu_confirm_delete.html'
     success_url = reverse_lazy('menu-list')
+
 
 class ReservationListView(LoginRequiredMixin, ListView):
     model = Reservation
@@ -116,6 +122,7 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'reservation_confirm_delete.html'
     success_url = reverse_lazy('reservation-list')
 
+
 class CustomerListView(ListView):
     model = Customer
     template_name = 'customer_list.html'
@@ -142,7 +149,6 @@ class CustomerDeleteView(DeleteView):
     model = Customer
     template_name = 'customer_confirm_delete.html'
     success_url = reverse_lazy('customer-list')
-
 
 
 def home(request):

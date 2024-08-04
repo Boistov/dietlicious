@@ -1,77 +1,10 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ category.name }}</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            color: #343a40;
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            background-color: #343a40;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-        .container {
-            margin: 20px;
-        }
-        .dish-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .dish-item {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin: 10px;
-            padding: 20px;
-            text-align: center;
-            width: 200px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .dish-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .dish-item img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-        }
-        .dish-item h3 {
-            margin: 10px 0 5px 0;
-        }
-        .dish-item p {
-            margin: 5px 0;
-            color: #6c757d;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>{{ category.name }}</h1>
-    </div>
-    <div class="container">
-        <h2>Dishes</h2>
-        <div class="dish-list">
-            {% for dish in category.dish_set.all %}
-            <div class="dish-item">
-                <img src="{{ dish.image.url }}" alt="{{ dish.name }}">
-                <h3>{{ dish.name }}</h3>
-                <p>{{ dish.description }}</p>
-                <p><strong>${{ dish.price }}</strong></p>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Category Detail{% endblock %}
+
+{% block content %}
+    <h2>{{ category.name }}</h2>
+    <a href="{% url 'category-update' category.pk %}">Edit</a>
+    <a href="{% url 'category-delete' category.pk %}">Delete</a>
+    <a href="{% url 'category-list' %}">Back to Categories</a>
+{% endblock %}

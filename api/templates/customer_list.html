@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer List</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Customer List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Customer data will be added here dynamically using JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        // Sample customer data (replace with your actual data)
+        const customers = [
+            { name: "John Doe", email: "john.doe@example.com", phone: "123-456-7890", address: "123 Main St, Anytown, USA" },
+            { name: "Jane Smith", email: "jane.smith@example.com", phone: "987-654-3210", address: "456 Oak Ave, Springfield, USA" },
+            // Add more customer objects here
+        ];
+
+        // Function to create table rows from customer data
+        function createCustomerRows(customers) {
+            const tableBody = document.querySelector('tbody');
+            customers.forEach(customer => {
+                const row = tableBody.insertRow();
+                const nameCell = row.insertCell();
+                const emailCell = row.insertCell();
+                const phoneCell = row.insertCell();
+                const addressCell = row.insertCell();
+
+                nameCell.textContent = customer.name;
+                emailCell.textContent = customer.email;
+                phoneCell.textContent = customer.phone;
+                addressCell.textContent = customer.address;
+            });
+        }
+
+        // Call the function to populate the table
+        createCustomerRows(customers);
+    </script>
+
+</body>
+</html>
